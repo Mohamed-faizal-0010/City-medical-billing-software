@@ -1,0 +1,182 @@
+{
+  "entities": {
+    "PharmacyTenant": {
+      "title": "PharmacyTenant",
+      "description": "Multi-branch pharmacy profile and software controller configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "pharmacyCode": { "type": "string" },
+        "name": { "type": "string" },
+        "businessType": { "type": "string", "enum": ["retail", "wholesale", "both"] },
+        "retailActive": { "type": "boolean" },
+        "wholesaleActive": { "type": "boolean" },
+        "tagline": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "gstin": { "type": "string" },
+        "retailLicenseNo": { "type": "string" },
+        "wholesaleLicenseNo": { "type": "string" },
+        "subscriptionPlan": { "type": "string", "enum": ["Trial", "Monthly", "Annual", "Enterprise", "Lifetime"] },
+        "paymentStatus": { "type": "string", "enum": ["Active", "Grace_Period", "Pending", "Suspended"] },
+        "paymentUpiId": { "type": "string" },
+        "renewalDate": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "pharmacyCode", "name", "businessType"]
+    },
+    "Medicine": {
+      "title": "Medicine",
+      "description": "Pharmaceutical formulation catalog with batches and stock",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "genericName": { "type": "string" },
+        "strength": { "type": "string" },
+        "form": { "type": "string" },
+        "manufacturer": { "type": "string" },
+        "category": { "type": "string" },
+        "hsnCode": { "type": "string" },
+        "taxRate": { "type": "number" },
+        "minStockAlert": { "type": "number" },
+        "ptr": { "type": "number" },
+        "wholesaleRate": { "type": "number" },
+        "boxSize": { "type": "number" },
+        "prescriptionRequired": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "genericName", "manufacturer"]
+    },
+    "SaleTransaction": {
+      "title": "SaleTransaction",
+      "description": "Retail pharmacy cash memo or wholesale B2B tax invoice",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "saleType": { "type": "string", "enum": ["retail", "wholesale"] },
+        "patientName": { "type": "string" },
+        "buyerBusinessName": { "type": "string" },
+        "buyerGstin": { "type": "string" },
+        "buyerDrugLicense": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "totalTax": { "type": "number" },
+        "totalDiscount": { "type": "number" },
+        "grandTotal": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Pending", "Partial", "Refunded"] },
+        "paidAmount": { "type": "number" },
+        "pendingBalance": { "type": "number" },
+        "creditDays": { "type": "number" },
+        "paymentDueDate": { "type": "string" },
+        "cashierName": { "type": "string" }
+      },
+      "required": ["id", "date", "subtotal", "grandTotal", "paymentMethod"]
+    },
+    "PurchaseInvoice": {
+      "title": "PurchaseInvoice",
+      "description": "Inward wholesale pharmaceutical purchase bill from manufacturers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "invoiceNumber": { "type": "string" },
+        "date": { "type": "string" },
+        "supplierId": { "type": "string" },
+        "supplierName": { "type": "string" },
+        "supplierGstin": { "type": "string" },
+        "purchaseType": { "type": "string", "enum": ["wholesale", "retail_inward"] },
+        "subtotal": { "type": "number" },
+        "taxAmount": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "grandTotal": { "type": "number" },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Pending", "Partial"] },
+        "paidAmount": { "type": "number" },
+        "dueAmount": { "type": "number" },
+        "dueDate": { "type": "string" }
+      },
+      "required": ["id", "invoiceNumber", "date", "supplierName", "grandTotal"]
+    },
+    "WholesaleBuyer": {
+      "title": "WholesaleBuyer",
+      "description": "Chemist, pharmacy, and hospital B2B customer directory",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "businessName": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "gstin": { "type": "string" },
+        "drugLicenseNo": { "type": "string" },
+        "creditLimit": { "type": "number" },
+        "creditDays": { "type": "number" },
+        "outstandingBalance": { "type": "number" }
+      },
+      "required": ["id", "businessName", "phone"]
+    },
+    "SalesReturn": {
+      "title": "SalesReturn",
+      "description": "Credit note return from retail customer or wholesale chemist",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "invoiceId": { "type": "string" },
+        "date": { "type": "string" },
+        "customerName": { "type": "string" },
+        "refundAmount": { "type": "number" },
+        "returnType": { "type": "string", "enum": ["retail", "wholesale"] },
+        "processedBy": { "type": "string" }
+      },
+      "required": ["id", "invoiceId", "date", "refundAmount"]
+    },
+    "PurchaseReturn": {
+      "title": "PurchaseReturn",
+      "description": "Debit note return to pharmaceutical manufacturer / supplier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "purchaseInvoiceNumber": { "type": "string" },
+        "date": { "type": "string" },
+        "supplierName": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "processedBy": { "type": "string" }
+      },
+      "required": ["id", "purchaseInvoiceNumber", "date", "supplierName", "totalAmount"]
+    }
+  },
+  "firestore": {
+    "/pharmacies/{pharmacyId}": {
+      "schema": "PharmacyTenant",
+      "description": "Registered pharmacy branches and multi-store settings"
+    },
+    "/medicines/{medicineId}": {
+      "schema": "Medicine",
+      "description": "Medicines and batch formulations shared across web and mobile"
+    },
+    "/sales/{saleId}": {
+      "schema": "SaleTransaction",
+      "description": "Sales records synchronized between desktop terminal and mobile app"
+    },
+    "/purchases/{purchaseId}": {
+      "schema": "PurchaseInvoice",
+      "description": "Pharmaceutical manufacturer purchase inward bills"
+    },
+    "/wholesale_buyers/{buyerId}": {
+      "schema": "WholesaleBuyer",
+      "description": "B2B Chemist buyers and credit accounts"
+    },
+    "/sales_returns/{returnId}": {
+      "schema": "SalesReturn",
+      "description": "Sales returns and credit notes"
+    },
+    "/purchase_returns/{returnId}": {
+      "schema": "PurchaseReturn",
+      "description": "Purchase returns and debit notes to manufacturers"
+    }
+  }
+}

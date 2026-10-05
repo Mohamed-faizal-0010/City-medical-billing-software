@@ -1,0 +1,49 @@
+{
+  "packageId": "in.citymedical.pharmacy",
+  "host": "ais-dev-42qg26wnmxwpknnbbmmkus-516085797282.asia-southeast1.run.app",
+  "name": "City Medical - Pharmacy Management System",
+  "launcherName": "City Medical",
+  "themeColor": "#0f766e",
+  "navigationColor": "#0f766e",
+  "backgroundColor": "#0f766e",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "/pwa-512x512.png",
+  "maskableIconUrl": "/pwa-maskable-512x512.png",
+  "appVersionName": "2.4.0",
+  "appVersionCode": 240,
+  "shortcuts": [
+    {
+      "name": "Quick POS Billing",
+      "short_name": "POS",
+      "url": "/?tab=pos",
+      "icon": "/pwa-192x192.png"
+    },
+    {
+      "name": "Inventory & Batch Stock",
+      "short_name": "Stock",
+      "url": "/?tab=inventory",
+      "icon": "/pwa-192x192.png"
+    },
+    {
+      "name": "Clinic OPD Consultations",
+      "short_name": "Clinic",
+      "url": "/?tab=clinic",
+      "icon": "/pwa-192x192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {
+    "playBilling": {
+      "enabled": false
+    },
+    "locationDelegation": {
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  }
+}

@@ -1,0 +1,80 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Pharmacy Branches & Controller Settings
+    match /pharmacies/{pharmacyId} {
+      allow read: if true;
+      allow write: if isSignedIn() || request.auth == null;
+    }
+
+    // Medicines Catalog & Batches
+    match /medicines/{medicineId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Sales & Invoices (Desktop and Mobile shared synchronization)
+    match /sales/{saleId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if isSignedIn();
+    }
+
+    // Purchases from Pharmaceuticals
+    match /purchases/{purchaseId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Wholesale Buyers (Chemists & Hospitals)
+    match /wholesale_buyers/{buyerId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Sales Returns (Credit Notes)
+    match /sales_returns/{returnId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Purchase Returns (Debit Notes)
+    match /purchase_returns/{returnId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Patients Directory
+    match /patients/{patientId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Suppliers & Manufacturers
+    match /suppliers/{supplierId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Users & Credentials
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

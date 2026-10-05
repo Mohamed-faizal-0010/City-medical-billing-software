@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "in.citymedical.pharmacy",
+      "sha256_cert_fingerprints": [
+        "14:6D:E9:7F:0F:52:CC:7A:B4:78:A4:9B:F3:A0:98:90:54:17:F2:F2:C4:B9:94:07:95:67:84:12:F1:C9:22:98"
+      ]
+    }
+  }
+]

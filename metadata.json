@@ -1,0 +1,7 @@
+{
+  "name": "City Medical - Pharmacy Management System",
+  "description": "Cloud-based pharmacy ERP for City Medical (Melur, Madurai, Tamil Nadu). Real-time inventory tracking, batch & expiry management, POS with UPI payment gateway, generic substitutions, automated patient refill reminders, POs & debit notes, and P&L tax reporting.",
+  "requestFramePermissions": ["microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
